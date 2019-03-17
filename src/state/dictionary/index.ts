@@ -1,0 +1,1 @@
+export { dictionaryReducer } from './dictionaryReducer';
