@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { IDictionaries, IDictionary } from 'src/state/dictionary/dictionaryReducer';
 
@@ -15,9 +16,6 @@ const DictionaryList: React.FC<IDictionaryListProps> = ({ list }) => {
   const deleteItem = (item: IDictionary['id']) => () => {
     console.log('delete: ', item); // tslint:disable-line
   };
-  const viewItem = (item: IDictionary['id']) => () => {
-    console.log('view: ', item); // tslint:disable-line
-  };
 
   return (
     <ul>
@@ -25,8 +23,8 @@ const DictionaryList: React.FC<IDictionaryListProps> = ({ list }) => {
         list.map((dictionary: IDictionary) =>
           (
             <li key={dictionary.id}>
-              <a onClick={viewItem(dictionary.id)}>{dictionary.from}/{dictionary.to}</a> -
-              <a onClick={deleteItem(dictionary.id)}>delete</a>
+              <Link to={`/edit/${dictionary.id}`}>{dictionary.from}/{dictionary.to}</Link> -
+              <a onClick={deleteItem(dictionary.id)} href="#">delete</a>
             </li>
           )
         )

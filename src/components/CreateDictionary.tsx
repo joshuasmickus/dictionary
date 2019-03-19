@@ -1,6 +1,15 @@
 import { Form, Formik } from 'formik';
 import * as React from 'react';
+import { connect } from 'react-redux';
 
+import { IDictionary } from 'src/state/dictionary/dictionaryReducer';
+import { createDictionary } from 'src/state/dictionary/dictionaryRoutines';
+
+import './CreateDictionary.css';
+
+interface ICreateDictionaryProps {
+  createDictionaryRequest: (values: IDictionary) => void;
+}
 interface ICreateDictionaryState {
   validated: boolean;
 }
@@ -8,7 +17,7 @@ const validate = (validater: any) => {
   console.log(validater); // tslint:disable-line
 };
 
-export class CreateDictionary extends React.Component<{}, ICreateDictionaryState> {
+class CreateDictionary extends React.Component<ICreateDictionaryProps, ICreateDictionaryState> {
   public state = {
     validated: false
   };
@@ -34,21 +43,28 @@ export class CreateDictionary extends React.Component<{}, ICreateDictionaryState
         }) => (
           <Form>
             <h1>Create dictionary item</h1>
-            <label>From:</label>
-            <input
-              name="from"
-              required={true}
-              type="text"
-              onChange={this.handleChange(handleChange)}
-            />
-            <label>To:</label>
-            <input
-              name="to"
-              required={true}
-              type="text"
-              onChange={this.handleChange(handleChange)}
-            />
-            <button type="submit">Create dictionary</button>
+            <label>
+              <span>From:</span>
+              <input
+                name="from"
+                required={true}
+                type="text"
+                onChange={this.handleChange(handleChange)}
+              />
+            </label>
+            <label>
+              <span>To:</span>
+              <input
+                name="to"
+                required={true}
+                type="text"
+                onChange={this.handleChange(handleChange)}
+              />
+            </label>
+            <label>
+              <span>&nbsp;</span>
+              <button type="submit">Create dictionary</button>
+            </label>
         </Form>
         )}
       </Formik>
@@ -58,7 +74,13 @@ export class CreateDictionary extends React.Component<{}, ICreateDictionaryState
   private handleChange = (handleChange: Formik['handleChange']) => (event: React.FormEvent) => {
     handleChange(event);
   }
-  private handleSubmit = (event: any) => {
-     console.log(event); // tslint:disable-line
+  private handleSubmit = (values: IDictionary) => {
+     this.props.createDictionaryRequest(values);
   }
 }
+
+const mapDispatchToProps = (dispatch: (action: any) => void) => ({
+  createDictionaryRequest: (values: IDictionary) => dispatch(createDictionary.request(values))
+})
+
+export default connect(null, mapDispatchToProps)(CreateDictionary);

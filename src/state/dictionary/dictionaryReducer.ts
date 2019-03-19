@@ -1,6 +1,12 @@
 import produce from 'immer';
-import { Action } from 'redux';
+import uuid from 'uuid/v4';
 
+import { createDictionary } from './dictionaryRoutines';
+
+interface IAction {
+  type: any;
+  payload?: any;
+};
 export interface IDictionary {
   from: string;
   to: string;
@@ -15,10 +21,10 @@ export const initialState: IDictionaries = {
   list: [{ from: 'some value', to: 'some other value', id: 1 }]
 };
 
-export const dictionaryReducer = (state = initialState, action: Action) =>
+export const dictionaryReducer = (state = initialState, action: IAction) =>
   produce(state, draft => {
     switch (action.type) {
-      default:
-        console.log('hello'); // tslint:disable-line
+      case createDictionary.REQUEST:
+        draft.list.push({ ...action.payload, id: uuid() });
     }
   });
