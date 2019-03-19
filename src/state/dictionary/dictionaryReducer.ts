@@ -4,6 +4,7 @@ import { Action } from 'redux';
 export interface IDictionary {
   from: string;
   to: string;
+  id: number;
 };
 
 export interface IDictionaries {
@@ -11,13 +12,13 @@ export interface IDictionaries {
 }
 
 export const initialState: IDictionaries = {
-  list: []
+  list: [{ from: 'some value', to: 'some other value', id: 1 }]
 };
 
 export const dictionaryReducer = (state = initialState, action: Action) =>
   produce(state, draft => {
     switch (action.type) {
       default:
-        console.log('hello');
+        console.log('hello'); // tslint:disable-line
     }
   });
