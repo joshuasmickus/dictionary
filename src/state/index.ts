@@ -1,5 +1,6 @@
-import { applyMiddleware, combineReducers, createStore, Store } from 'redux';
+import { applyMiddleware, combineReducers, compose, createStore, Store } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import persistState from 'redux-localstorage'
 import createSagaMiddleware from 'redux-saga';
 import { all } from 'redux-saga/effects';
 
@@ -21,10 +22,15 @@ interface IStore extends Store {
   sagaTask?: any;
 }
 
+const enhance = compose(
+  composeWithDevTools(applyMiddleware(sagaMiddleware)),
+  persistState(),
+);
+
 export function configureStore() {
   const store: IStore = createStore(
     rootReducer,
-    composeWithDevTools(applyMiddleware(sagaMiddleware))
+    enhance
   );
 
   store.runSagaTask = () => {

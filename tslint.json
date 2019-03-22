@@ -6,5 +6,20 @@
       "node_modules/**/*.ts",
       "coverage/lcov-report/*.js"
     ]
+  },
+  "rules": {
+    "no-increment-decrement": false,
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-pascal-case"
+    ],
+    "no-this-assignment": false,
+    "jsx-no-multiline-js": false,
+    "trailing-comma": false,
+    "jsx-no-lambda": false,
+    "no-var-requires": false,
+    "member-ordering": false
   }
 }

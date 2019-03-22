@@ -7,6 +7,7 @@ import { configureStore } from './state';
 
 import { App } from './components/App';
 
+import '../node_modules/react-toastify/dist/ReactToastify.min.css';
 import './index.css';
 
 const store = configureStore();
