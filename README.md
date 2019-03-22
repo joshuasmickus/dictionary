@@ -27,4 +27,23 @@ I added some basic snapshot tests as well for the React component coverage, and 
 A lot of the style and chosen technologies are what I use in my current role, and some are flavours which I have developed over the last few years in my professional career. I love writing easily maintainable code and part of this is making sure it is self documenting and written in a way that a more junior develop could understand too, I hope you feel I have achieved that here.
 
 Thanks
+
 Josh
+
+
+## Instructions
+
+`yarn` to install the npm modules
+`yarn start` to start the dev server
+`yarn test` to run the unit tests
+`yarn lint` to check lint style
+`yarn build` to get a production build built
+
+This was built on a machine using:
+
+```
+node -v // v10.13.0
+npm -v // 6.4.1
+```
+
+So if you are using node/npm of a different version you might run into issues.
