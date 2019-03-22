@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
-import { IDictionaryItem, IDictionaryName, IDictionaryState } from 'src/models/common';
-import { deleteDictionaryItem } from 'src/state/dictionary/dictionaryRoutines';
+import { IDictionaryItem, IDictionaryName, IDictionaryState } from '../../models/common';
+import { deleteDictionaryItem } from '../../state/dictionary/dictionaryRoutines';
 
 interface IDictionaryItemListProps {
   items: IDictionaryItem[];
@@ -27,7 +27,6 @@ export const DictionaryItemList: React.FC<IDictionaryItemListProps> = ({
   const filteredDictionaries = list.filter((dictionary) => dictionary.id === dictionaryId);
   const shouldShowItems = listItems.length > 0;
 
-  console.log({ items, listItems }); // tslint:disable-line
   if (filteredDictionaries.length === 0) {
     return <Redirect to="/" />;
   }

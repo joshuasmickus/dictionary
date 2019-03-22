@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-import { IDictionaryName, IDictionaryState } from 'src/models/common';
-import { deleteDictionary } from 'src/state/dictionary/dictionaryRoutines';
+import { IDictionaryName, IDictionaryState } from '../../models/common';
+import { deleteDictionary } from '../../state/dictionary/dictionaryRoutines';
 
 interface IDictionaryListProps {
   list: IDictionaryName[];

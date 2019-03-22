@@ -3,52 +3,35 @@ import * as React from 'react';
 import { Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { IDictionaryItem, IDictionaryName, IDictionaryState } from 'src/models/common';
-import { createDictionaryItem } from 'src/state/dictionary/dictionaryRoutines';
+import { IDictionaryItem, IDictionaryName, IDictionaryState } from '../../models/common';
+import { createDictionaryItem } from '../../state/dictionary/dictionaryRoutines';
 
-import './CreateDictionaryItem.css';
+import { validate } from './CreateDictionaryItem.validate';
 
-interface IDictionaryErrors {
-  from?: string;
-  to?: string;
-};
 export interface ICreateDictionaryItemProps {
   createDictionaryItemRequest: (values: IDictionaryItem) => void;
+  items: IDictionaryItem[];
   list: IDictionaryName[];
   match: any;
 };
 interface ICreateDictionaryItemState {
-  redirectToHome: boolean;
-};
-const validate = (values: any) => {
-  const errors: IDictionaryErrors = {};
-
-  if (values.from === '') {
-    errors.from = 'Enter a from value';
-  }
-
-  if (values.to === '') {
-    errors.to = 'Enter a to value';
-  }
-
-  console.log({ errors }); // tslint:disable-line
-  return errors;
+  redirect: boolean;
 };
 
 export class CreateDictionaryItem extends React.Component<ICreateDictionaryItemProps, ICreateDictionaryItemState> {
   public state = {
-    redirectToHome: false
+    redirect: false
   };
 
   public render() {
     const { id: dictionaryId } = this.props.match.params;
-    const filteredDictionary = this.props.list.filter((dictionary: IDictionaryName) => dictionary.id === dictionaryId);
+    const filteredList = this.props.list.filter((dictionary: IDictionaryName) => dictionary.id === dictionaryId);
 
-    if (this.state.redirectToHome || filteredDictionary.length === 0) {
-      return <Redirect to="/" />;
+    if (this.state.redirect || filteredList.length === 0) {
+      return <Redirect to={`/edit-dictionary/${dictionaryId}`} />;
     }
 
-    const { name: dictionaryName } = filteredDictionary[0];
+    const { name: dictionaryName } = filteredList[0];
 
     return (
       <Formik
@@ -57,7 +40,7 @@ export class CreateDictionaryItem extends React.Component<ICreateDictionaryItemP
           from: '',
           to: ''
         }}
-        validate={validate}
+        validate={(values) => validate(this.props.items, values)}
       >
         {({
           handleChange,
@@ -107,12 +90,13 @@ export class CreateDictionaryItem extends React.Component<ICreateDictionaryItemP
      toast(`Dictionary item '${values.from} / ${values.to}' created!`);
 
      this.setState({
-      redirectToHome: true
+      redirect: true
      });
   }
 }
 
 export const mapStateToProps = ({ dictionary }: IDictionaryState) => ({
+  items: dictionary.items,
   list: dictionary.list
 });
 

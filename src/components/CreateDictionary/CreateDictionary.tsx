@@ -3,8 +3,8 @@ import * as React from 'react';
 import { Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { IDictionaryName, IDictionaryState } from 'src/models/common';
-import { createDictionary } from 'src/state/dictionary/dictionaryRoutines';
+import { IDictionaryName, IDictionaryState } from '../../models/common';
+import { createDictionary } from '../../state/dictionary/dictionaryRoutines';
 
 import './CreateDictionary.css';
 

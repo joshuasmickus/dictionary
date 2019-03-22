@@ -25,7 +25,7 @@ export const dictionaryReducer = (state = initialState, action: IAction) =>
           draft.list = draft.list.filter((item) => item.id !== action.payload);
           break;
         case deleteDictionaryItem.REQUEST:
-          draft.items = draft.items.filter((item) => item.id !== action.payload.id && item.dictionaryId !== action.payload.dictionaryId);
+          draft.items = draft.items.filter((item) => !(item.id === action.payload.id && item.dictionaryId === action.payload.dictionaryId));
           break;
     }
 

@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given a DictionaryList component when it is rendered should match the snapshot 1`] = `
+<ul>
+  <li>
+    something
+    <a
+      href="/edit-dictionary/someid"
+    >
+      edit
+    </a>
+    - 
+    <a
+      href="/delete-dictionary/someid"
+    >
+      delete
+    </a>
+  </li>
+</ul>
+`;

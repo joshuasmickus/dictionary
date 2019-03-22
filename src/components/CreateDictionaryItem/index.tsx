@@ -6,4 +6,6 @@ import {
   mapStateToProps
 } from './CreateDictionaryItem';
 
+import './CreateDictionaryItem.css';
+
 export default connect(mapStateToProps, mapDispatchToProps)(CreateDictionaryItem);

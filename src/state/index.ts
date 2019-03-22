@@ -1,8 +1,7 @@
-import { applyMiddleware, combineReducers, compose, createStore, Store } from 'redux';
+import { combineReducers, compose, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import persistState from 'redux-localstorage'
-import createSagaMiddleware from 'redux-saga';
-import { all } from 'redux-saga/effects';
+import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 import { dictionaryReducer } from './dictionary';
 
@@ -10,34 +9,20 @@ export const rootReducer = combineReducers({
   dictionary: dictionaryReducer
 });
 
-export const rootSagas = function*() {
-  yield all([
-  ]);
-};
-
-const sagaMiddleware = createSagaMiddleware();
-
-interface IStore extends Store {
-  runSagaTask?: any;
-  sagaTask?: any;
-}
-
 const enhance = compose(
-  composeWithDevTools(applyMiddleware(sagaMiddleware)),
-  persistState(),
+  composeWithDevTools()
 );
 
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
 export function configureStore() {
-  const store: IStore = createStore(
-    rootReducer,
-    enhance
-  );
+  const store = createStore(persistedReducer, enhance);
+  const persistor = persistStore(store);
 
-  store.runSagaTask = () => {
-    store.sagaTask = sagaMiddleware.run(rootSagas);
-  };
-
-  store.runSagaTask();
-
-  return store;
+  return { store, persistor };
 }

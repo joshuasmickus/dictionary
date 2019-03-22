@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given a CreateDictionaryItem component when it is rendered should match the snapshot 1`] = `
+<form>
+  <h1>
+    Create dictionary item for 
+    something
+  </h1>
+  <label>
+    <span>
+      From:
+    </span>
+    <input
+      name="from"
+      required=""
+      type="text"
+    />
+  </label>
+  <label>
+    <span>
+      To:
+    </span>
+    <input
+      name="to"
+      required=""
+      type="text"
+    />
+  </label>
+  <label>
+    <span>
+      
+    </span>
+    <button
+      type="submit"
+    >
+      Create dictionary item
+    </button>
+  </label>
+</form>
+`;
