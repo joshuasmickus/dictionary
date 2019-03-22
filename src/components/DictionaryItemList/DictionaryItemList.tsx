@@ -46,7 +46,7 @@ export const DictionaryItemList: React.FC<IDictionaryItemListProps> = ({
             (
               <li key={item.id}>
                 {item.from} {item.to}&nbsp;
-                <Link to={`/edit-dictionary/${dictionaryId}/edit-item/${item.id}`}>edit</Link> -&nbsp;
+                {/* <Link to={`/edit-dictionary/${dictionaryId}/edit-item/${item.id}`}>edit</Link> -&nbsp; */}
                 <a onClick={deleteItem(item.id)} href={`/edit-dictionary/${dictionaryId}/delete-item/${item.id}`}>delete</a>
               </li>
             )
